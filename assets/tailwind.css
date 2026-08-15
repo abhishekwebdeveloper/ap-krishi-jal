@@ -10,10 +10,13 @@
       "Courier New", monospace;
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-blue-500: oklch(62.3% 0.214 259.815);
-    --text-2xl: 1.5rem;
-    --text-2xl--line-height: calc(2 / 1.5);
+    --font-weight-bold: 700;
+    --default-transition-duration: 350ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --text-2xl: 1.5rem;
+    --text-4xl: 2rem;
   }
 }
 @layer base {
@@ -179,20 +182,20 @@
   }
   .container {
     width: 100%;
-    @media (width >= 40rem) {
-      max-width: 40rem;
+    @media (width >= 390px) {
+      max-width: 390px;
     }
-    @media (width >= 48rem) {
-      max-width: 48rem;
+    @media (width >= 768px) {
+      max-width: 768px;
     }
-    @media (width >= 64rem) {
-      max-width: 64rem;
+    @media (width >= 1280px) {
+      max-width: 1280px;
     }
-    @media (width >= 80rem) {
-      max-width: 80rem;
+    @media (width >= 1366px) {
+      max-width: 1366px;
     }
-    @media (width >= 96rem) {
-      max-width: 96rem;
+    @media (width >= 1640px) {
+      max-width: 1640px;
     }
   }
   .block {
@@ -228,9 +231,12 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
-  .text-2xl {
-    font-size: var(--text-2xl);
-    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  .text-4xl {
+    font-size: var(--text-4xl);
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
   }
   .capitalize {
     text-transform: capitalize;
@@ -238,24 +244,17 @@
   .italic {
     font-style: italic;
   }
-  .underline {
-    text-decoration-line: underline;
-  }
-  .decoration-blue-500 {
-    text-decoration-color: var(--color-blue-500);
-  }
-  .decoration-red-500 {
-    text-decoration-color: var(--color-red-500);
-  }
-  .decoration-4 {
-    text-decoration-thickness: 4px;
-  }
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  @media (width >= 1280px) {
+    .lg\:text-2xl {
+      font-size: var(--text-2xl);
+    }
   }
 }
 @property --tw-rotate-x {
@@ -282,6 +281,10 @@
   syntax: "*";
   inherits: false;
   initial-value: solid;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
 }
 @property --tw-shadow {
   syntax: "*";
@@ -410,6 +413,7 @@
       --tw-skew-x: initial;
       --tw-skew-y: initial;
       --tw-border-style: solid;
+      --tw-font-weight: initial;
       --tw-shadow: 0 0 #0000;
       --tw-shadow-color: initial;
       --tw-shadow-alpha: 100%;
