@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* Scan Liquid templates for class names (paths are relative to this file). */
+@source "../blocks/**/*.liquid";
+@source "../layout/**/*.liquid";
+@source "../sections/**/*.liquid";
+@source "../snippets/**/*.liquid";
+@source "../templates/**/*.liquid";

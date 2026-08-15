@@ -15,3 +15,6 @@ node_modules/
 ## Release files
 release
 *.zip
+
+# Tailwind build output
+assets/tailwind.css

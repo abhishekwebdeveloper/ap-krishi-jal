@@ -4,10 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "shopify theme dev -s krishi-jal-jfelmfps.myshopify.com",
-    "push": "shopify theme push -s krishi-jal-jfelmfps.myshopify.com",
-    "push:unpublished": "shopify theme push --unpublished -s krishi-jal-jfelmfps.myshopify.com",
+    "tw:build": "tailwindcss -i ./src/tailwind.css -o ./assets/tailwind.css --minify",
+    "tw:watch": "tailwindcss -i ./src/tailwind.css -o ./assets/tailwind.css --watch",
+    "push": "npm run tw:build && shopify theme push -s krishi-jal-jfelmfps.myshopify.com",
+    "push:unpublished": "npm run tw:build && shopify theme push --unpublished -s krishi-jal-jfelmfps.myshopify.com",
     "pull": "shopify theme pull -s krishi-jal-jfelmfps.myshopify.com",
     "check": "shopify theme check",
     "publish": "shopify theme publish -s krishi-jal-jfelmfps.myshopify.com"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
   }
 }
