@@ -1,0 +1,13 @@
+{
+  "name": "ap-krishi-jal",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "shopify theme dev -s krishi-jal-jfelmfps.myshopify.com",
+    "push": "shopify theme push -s krishi-jal-jfelmfps.myshopify.com",
+    "push:unpublished": "shopify theme push --unpublished -s krishi-jal-jfelmfps.myshopify.com",
+    "pull": "shopify theme pull -s krishi-jal-jfelmfps.myshopify.com",
+    "check": "shopify theme check",
+    "publish": "shopify theme publish -s krishi-jal-jfelmfps.myshopify.com"
+  }
+}
