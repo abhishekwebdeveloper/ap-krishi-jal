@@ -13,13 +13,42 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "logo": {
+          "type": "footer-logo",
+          "settings": {
+            "logo_width": 160,
+            "text": "<p>Your brand tagline and address go here.</p>"
+          }
+        },
+        "menu_quick": {
+          "type": "footer-menu",
+          "settings": {
+            "heading": "Quick menu"
+          }
+        },
+        "menu_products": {
+          "type": "footer-menu",
+          "settings": {
+            "heading": "Products"
+          }
+        },
+        "newsletter": {
+          "type": "footer-newsletter",
+          "settings": {
+            "heading": "Subscribe to our newsletter"
+          }
+        }
+      },
+      "block_order": ["logo", "menu_quick", "menu_products", "newsletter"],
       "settings": {
-        "menu": "",
-        "show_payment_icons": true
+        "show_payment_icons": true,
+        "show_powered_by": false,
+        "background_color": "#FFFFFF",
+        "text_color": "#303030",
+        "border_color": "#EAEAEA"
       }
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer"]
 }

@@ -1,0 +1,158 @@
+{%- comment -%}
+  Footer newsletter block.
+
+  Native Shopify customer signup form. Submitted emails appear in the store's
+  customer list (tagged "newsletter") and are eligible for email marketing.
+{%- endcomment -%}
+
+<div class="ap-footer-newsletter" {{ block.shopify_attributes }}>
+  {%- if block.settings.heading != blank -%}
+    <h2 class="ap-footer-newsletter__heading">{{ block.settings.heading }}</h2>
+  {%- endif -%}
+
+  {%- if block.settings.description != blank -%}
+    <div class="ap-footer-newsletter__text">{{ block.settings.description }}</div>
+  {%- endif -%}
+
+  {%- form 'customer', class: 'ap-footer-newsletter__form' -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+
+    {%- if form.posted_successfully? -%}
+      <p class="ap-footer-newsletter__message" role="status">
+        {{ block.settings.success_text | default: 'Thanks for subscribing!' }}
+      </p>
+    {%- else -%}
+      <label class="ap-visually-hidden" for="NewsletterEmail-{{ block.id }}">
+        {{ block.settings.placeholder | default: 'Email' }}
+      </label>
+      <div class="ap-footer-newsletter__field">
+        <input
+          id="NewsletterEmail-{{ block.id }}"
+          type="email"
+          name="contact[email]"
+          value="{{ form.email }}"
+          placeholder="{{ block.settings.placeholder | default: 'Email' | escape }}"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="email"
+          required
+        >
+        <button type="submit" class="ap-footer-newsletter__submit">
+          {{ block.settings.button_label | default: 'Sign up' }}
+        </button>
+      </div>
+
+      {%- if form.errors -%}
+        <p class="ap-footer-newsletter__message ap-footer-newsletter__message--error" role="alert">
+          {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+        </p>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endform -%}
+</div>
+
+{% stylesheet %}
+  .ap-footer-newsletter {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ap-footer-newsletter__heading {
+    font-size: var(--ap-h6-font-size);
+    color: inherit;
+  }
+
+  .ap-footer-newsletter__text {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .ap-footer-newsletter__field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .ap-footer-newsletter__field input {
+    flex: 1 1 12rem;
+    min-width: 0;
+    padding: 0.625rem 0.875rem;
+    color: inherit;
+    background-color: transparent;
+  }
+
+  .ap-footer-newsletter__submit {
+    flex: 0 0 auto;
+    padding: 0.625rem 1.25rem;
+    border: 1px solid currentcolor;
+    border-radius: var(--ap-input-border-radius);
+    background-color: var(--ap-link-color);
+    color: #fff;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .ap-footer-newsletter__submit:hover {
+    background-color: var(--ap-link-hover-color);
+  }
+
+  .ap-footer-newsletter__message {
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  .ap-footer-newsletter__message--error {
+    color: #b00020;
+  }
+
+  .ap-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Subscribe to our newsletter"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email placeholder",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Sign up"
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Success message",
+      "default": "Thanks for subscribing!"
+    }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

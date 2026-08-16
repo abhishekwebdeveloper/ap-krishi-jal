@@ -1,56 +1,216 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-  </div>
+{%- comment -%}
+  Footer section.
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+  Hosts theme blocks (logo, menu columns, newsletter, or any @theme block) laid
+  out as responsive columns, followed by a bottom bar with payment icons,
+  copyright and policy links. All content is editable in the Theme Editor.
+{%- endcomment -%}
 
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
+{%- liquid
+  assign bg = section.settings.background_color
+  assign fg = section.settings.text_color
+  assign border = section.settings.border_color
+-%}
+
+<footer
+  class="ap-footer"
+  role="contentinfo"
+  style="--ap-footer-bg: {{ bg }}; --ap-footer-fg: {{ fg }}; --ap-footer-border: {{ border }};"
+>
+  <div class="ap-container ap-footer__inner">
+    {%- if section.blocks.size > 0 -%}
+      <div class="ap-footer__columns">
+        {% content_for 'blocks' %}
+      </div>
+    {%- endif -%}
+
+    <div class="ap-footer__bar">
+      <div class="ap-footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}
+        {%- if section.settings.show_powered_by %} · {{ powered_by_link }}{%- endif -%}
+      </div>
+
+      {%- if section.settings.policy_menu != blank and section.settings.policy_menu.links.size > 0 -%}
+        <nav class="ap-footer__policies" aria-label="Legal">
+          <ul>
+            {%- for link in section.settings.policy_menu.links -%}
+              <li>
+                <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <ul class="ap-footer__payment" aria-label="Payment methods">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
   </div>
 </footer>
 
 {% stylesheet %}
-  footer {
+  .ap-footer {
+    margin-top: 3rem;
+    padding-block: 3rem 1.5rem;
+    background-color: var(--ap-footer-bg);
+    color: var(--ap-footer-fg);
+  }
+
+  .ap-footer__inner {
     display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .ap-footer__columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem 2.5rem;
+    align-items: start;
+  }
+
+  .ap-footer__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-    margin-top: 2rem;
+    gap: 1rem 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--ap-footer-border);
+    font-size: 0.875rem;
   }
-  footer a {
+
+  .ap-footer__copyright a {
+    color: inherit;
     text-decoration: none;
-    color: var(--ap-body-color);
   }
-  footer .footer__links,
-  footer .footer__payment {
+
+  .ap-footer__copyright a:hover {
+    text-decoration: underline;
+  }
+
+  .ap-footer__policies ul {
     display: flex;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ap-footer__policies a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ap-footer__policies a:hover {
+    text-decoration: underline;
+  }
+
+  .ap-footer__payment {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ap-footer__payment svg {
+    width: 38px;
+    height: auto;
+  }
+
+  @media (max-width: 749px) {
+    .ap-footer__bar {
+      justify-content: flex-start;
+    }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.footer",
+  "name": "Footer",
+  "tag": "footer",
+  "class": "ap-footer-section",
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "footer-logo" },
+    { "type": "footer-menu" },
+    { "type": "footer-newsletter" }
+  ],
   "settings": [
     {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
       "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "id": "policy_menu",
+      "label": "Policy links",
+      "info": "Shown next to the copyright. Tip: create a menu of your store policies (Privacy, Refund, Terms)."
     },
     {
       "type": "checkbox",
       "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
+      "label": "Show payment icons",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_powered_by",
+      "label": "Show \"Powered by Shopify\"",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#303030"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Divider",
+      "default": "#EAEAEA"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "footer-logo",
+          "settings": { "text": "<p>Your brand tagline and address go here.</p>" }
+        },
+        {
+          "type": "footer-menu",
+          "settings": { "heading": "Quick menu" }
+        },
+        {
+          "type": "footer-menu",
+          "settings": { "heading": "Products" }
+        },
+        {
+          "type": "footer-newsletter",
+          "settings": {}
+        }
+      ]
     }
   ]
 }
