@@ -101,6 +101,42 @@ h6 {
   color: var(--ap-heading-color);
 }
 
+h1 {
+  font-size: var(--ap-h1-font-size);
+  line-height: var(--ap-h1-line-height);
+  letter-spacing: var(--ap-h1-letter-spacing);
+}
+
+h2 {
+  font-size: var(--ap-h2-font-size);
+  line-height: var(--ap-h2-line-height);
+  letter-spacing: var(--ap-h2-letter-spacing);
+}
+
+h3 {
+  font-size: var(--ap-h3-font-size);
+  line-height: var(--ap-h3-line-height);
+  letter-spacing: var(--ap-h3-letter-spacing);
+}
+
+h4 {
+  font-size: var(--ap-h4-font-size);
+  line-height: var(--ap-h4-line-height);
+  letter-spacing: var(--ap-h4-letter-spacing);
+}
+
+h5 {
+  font-size: var(--ap-h5-font-size);
+  line-height: var(--ap-h5-line-height);
+  letter-spacing: var(--ap-h5-letter-spacing);
+}
+
+h6 {
+  font-size: var(--ap-h6-font-size);
+  line-height: var(--ap-h6-line-height);
+  letter-spacing: var(--ap-h6-letter-spacing);
+}
+
 a {
   color: var(--ap-link-color);
 }
