@@ -353,25 +353,25 @@
       {
         "type": "color",
         "id": "heading_color",
-        "default": "#303030",
+        "default": "#062D17",
         "label": "t:labels.heading"
       },
       {
         "type": "color",
         "id": "foreground_color",
-        "default": "#303030",
+        "default": "#374151",
         "label": "t:labels.body_text"
       },
       {
         "type": "color",
         "id": "link_color",
-        "default": "#D95F1C",
+        "default": "#16A34A",
         "label": "t:labels.body_link"
       },
       {
         "type": "color",
         "id": "link_hover_color",
-        "default": "#B84D14",
+        "default": "#15803D",
         "label": "t:labels.body_hover"
       },
       {
@@ -383,7 +383,7 @@
       {
         "type": "color",
         "id": "border_color",
-        "default": "#EAEAEA",
+        "default": "#EEF2F0",
         "label": "t:labels.border"
       },
       {

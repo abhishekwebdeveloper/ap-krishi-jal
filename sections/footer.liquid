@@ -9,7 +9,7 @@
 -%}
 
 <footer
-  class="ap-site-footer mt-16 border-t border-t-gray-200 2xl:mt-20"
+  class="ap-site-footer mt-16 border-t border-t-ap-green-900 2xl:mt-20"
   style="--ap-footer-bg: {{ bg }}; --ap-footer-fg: {{ fg }}; --ap-footer-border: {{ border }};"
 >
   <div class="ap-container">
@@ -28,7 +28,7 @@
     {%- endif -%}
   </div>
 
-  <div class="ap-site-footer__footnote bg-[#FF5F1F]">
+  <div class="ap-site-footer__footnote bg-ap-darker">
     <div class="ap-container flex flex-wrap items-center justify-between gap-2 py-5 text-sm text-white space-between">
       <div class="ap-site-footer__footnote-copyright">
         &copy; {{ 'now' | date: '%Y' }}
@@ -138,19 +138,19 @@
       "type": "color",
       "id": "background_color",
       "label": "Background",
-      "default": "#FFFFFF"
+      "default": "#062D17"
     },
     {
       "type": "color",
       "id": "text_color",
       "label": "Text",
-      "default": "#303030"
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
       "id": "border_color",
       "label": "Divider",
-      "default": "#EAEAEA"
+      "default": "#14532D"
     }
   ],
   "presets": [

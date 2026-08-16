@@ -68,6 +68,29 @@
   --color-transparent: transparent;
   --color-white: #fff;
   --color-black: #000;
+  --color-ap-green-50: #f0fdf4;
+  --color-ap-green-100: #dcfce7;
+  --color-ap-green-200: #bbf7d0;
+  --color-ap-green-300: #86efac;
+  --color-ap-green-400: #4ade80;
+  --color-ap-green-500: #22c55e;
+  --color-ap-green-600: #16a34a;
+  --color-ap-green-700: #15803d;
+  --color-ap-green-800: #166534;
+  --color-ap-green-900: #14532d;
+  --color-ap-green-950: #062d17;
+  --color-ap-gold-50: #fffbeb;
+  --color-ap-gold-100: #fef3c7;
+  --color-ap-gold-200: #fde68a;
+  --color-ap-gold-300: #fcd34d;
+  --color-ap-gold-400: #fbbf24;
+  --color-ap-gold-500: #f0a040;
+  --color-ap-gold-600: #d97706;
+  --color-ap-gold-700: #b45309;
+  --color-ap-dark: #062d17;
+  --color-ap-darker: #041c0e;
+  --color-ap-surface: #f8faf9;
+  --color-ap-surface-muted: #eef2f0;
 }
 
 /* borderWidth: 3 -> border-3 (no theme namespace for border width in v4) */

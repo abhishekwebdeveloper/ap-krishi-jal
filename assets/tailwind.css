@@ -8,10 +8,7 @@
       "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-gray-100: oklch(96.7% 0.003 264.542);
     --color-gray-200: oklch(92.8% 0.006 264.531);
-    --color-gray-300: oklch(87.2% 0.01 258.338);
-    --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-white: #fff;
     --spacing: 0.25rem;
     --default-transition-duration: 350ms;
@@ -19,6 +16,8 @@
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --text-sm: 0.875rem;
+    --color-ap-green-900: #14532d;
+    --color-ap-darker: #041c0e;
   }
 }
 @layer base {
@@ -261,11 +260,17 @@
     border-top-style: var(--tw-border-style);
     border-top-width: 1px;
   }
+  .border-t-ap-green-900 {
+    border-top-color: var(--color-ap-green-900);
+  }
   .border-t-gray-200 {
     border-top-color: var(--color-gray-200);
   }
   .bg-\[\#FF5F1F\] {
     background-color: #FF5F1F;
+  }
+  .bg-ap-darker {
+    background-color: var(--color-ap-darker);
   }
   .py-5 {
     padding-block: calc(var(--spacing) * 5);
@@ -278,9 +283,6 @@
   }
   .text-sm {
     font-size: var(--text-sm);
-  }
-  .text-\[\#FF5F1F\] {
-    color: #FF5F1F;
   }
   .text-white {
     color: var(--color-white);
