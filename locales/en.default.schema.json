@@ -4,6 +4,8 @@
     "article": "Article",
     "block": "Block",
     "blog": "Blog",
+    "body": "Body",
+    "headings": "Headings",
     "cart": "Cart",
     "collection": "Collection",
     "collections": "Collections",
@@ -37,6 +39,17 @@
     "alignment": "Alignment",
     "background": "Background",
     "foreground": "Foreground",
+    "heading": "Headings",
+    "body_text": "Body text",
+    "body_link": "Body link",
+    "body_hover": "Body hover",
+    "body_background": "Body background",
+    "border": "Border",
+    "font_family": "Font family",
+    "font_variant": "Font variant",
+    "font_size": "Font size",
+    "line_height": "Line height",
+    "letter_spacing": "Letter spacing",
     "grid_gap": "Grid spacing",
     "grid_item_width": "Grid item width",
     "input_corner_radius": "Input corner radius",
@@ -73,5 +86,11 @@
       "subtitle": "Subtitle",
       "normal": "Normal text"
     },
+    "font_variant": {
+      "regular": "Regular",
+      "medium": "Medium",
+      "semibold": "Semibold",
+      "bold": "Bold"
+    }
   }
 }

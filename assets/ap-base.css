@@ -1,0 +1,110 @@
+/** Critical CSS for the theme. This file is included on every page. */
+
+/* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-height: 100svh;
+}
+
+html:has(dialog[scroll-lock][open], details[scroll-lock][open]) {
+  overflow: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  border-radius: var(--ap-input-border-radius);
+  border: 1px solid var(--ap-border-color);
+}
+
+select {
+  background-color: var(--ap-body-bg);
+  color: currentcolor;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--ap-border-color);
+}
+
+dialog {
+  background-color: var(--ap-body-bg);
+  color: var(--ap-body-color);
+}
+
+p {
+  text-wrap: pretty;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p:empty {
+  display: none;
+}
+
+:is(p, h1, h2, h3, h4, h5, h6):first-child,
+:empty:first-child + :where(p, h1, h2, h3, h4, h5, h6) {
+  margin-block-start: 0;
+}
+
+:is(p, h1, h2, h3, h4, h5, h6):last-child,
+:where(p, h1, h2, h3, h4, h5, h6) + :has(+ :empty:last-child) {
+  margin-block-end: 0;
+}
+
+/** Theme styles below */
+body {
+  font-family: var(--ap-body-font-family);
+  font-style: var(--ap-body-font-style);
+  font-weight: var(--ap-body-font-weight);
+  font-size: var(--ap-body-font-size);
+  line-height: var(--ap-body-line-height);
+  letter-spacing: var(--ap-body-letter-spacing);
+  background-color: var(--ap-body-bg);
+  color: var(--ap-body-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ap-heading-font-family);
+  font-style: var(--ap-heading-font-style);
+  font-weight: var(--ap-heading-font-weight);
+  color: var(--ap-heading-color);
+}
+
+a {
+  color: var(--ap-link-color);
+}
+
+a:hover {
+  color: var(--ap-link-hover-color);
+}
