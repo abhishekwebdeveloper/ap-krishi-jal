@@ -1,146 +1,155 @@
 /** Critical CSS for the theme. This file is included on every page. */
 
-/* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
-* {
-  box-sizing: border-box;
-  margin: 0;
-}
+/* Cascade layer order. `ap-base` sits AFTER Tailwind's `base` (so these theme
+   defaults beat Tailwind's preflight, e.g. its `h1-h6 { font-size: inherit }`)
+   but BEFORE `utilities` (so a Tailwind utility class on an element always wins).
+   Loaded before tailwind.css, so this sets the canonical order; Tailwind's own
+   `@layer` statements are a consistent subset and merge idempotently. */
+@layer properties, theme, base, components, ap-base, utilities;
 
-body {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  min-height: 100svh;
-}
+@layer ap-base {
+  /* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
 
-html:has(dialog[scroll-lock][open], details[scroll-lock][open]) {
-  overflow: hidden;
-}
+  body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100svh;
+  }
 
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
+  html:has(dialog[scroll-lock][open], details[scroll-lock][open]) {
+    overflow: hidden;
+  }
 
-input,
-textarea,
-select {
-  font: inherit;
-  border-radius: var(--ap-input-border-radius);
-  border: 1px solid var(--ap-border-color);
-}
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
 
-select {
-  background-color: var(--ap-body-bg);
-  color: currentcolor;
-}
+  input,
+  textarea,
+  select {
+    font: inherit;
+    border-radius: var(--ap-input-border-radius);
+    border: 1px solid var(--ap-border-color);
+  }
 
-hr {
-  border: none;
-  border-top: 1px solid var(--ap-border-color);
-}
+  select {
+    background-color: var(--ap-body-bg);
+    color: currentcolor;
+  }
 
-dialog {
-  background-color: var(--ap-body-bg);
-  color: var(--ap-body-color);
-}
+  hr {
+    border: none;
+    border-top: 1px solid var(--ap-border-color);
+  }
 
-p {
-  text-wrap: pretty;
-}
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
+  dialog {
+    background-color: var(--ap-body-bg);
+    color: var(--ap-body-color);
+  }
 
-p:empty {
-  display: none;
-}
+  p {
+    text-wrap: pretty;
+  }
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
 
-:is(p, h1, h2, h3, h4, h5, h6):first-child,
-:empty:first-child + :where(p, h1, h2, h3, h4, h5, h6) {
-  margin-block-start: 0;
-}
+  p:empty {
+    display: none;
+  }
 
-:is(p, h1, h2, h3, h4, h5, h6):last-child,
-:where(p, h1, h2, h3, h4, h5, h6) + :has(+ :empty:last-child) {
-  margin-block-end: 0;
-}
+  :is(p, h1, h2, h3, h4, h5, h6):first-child,
+  :empty:first-child + :where(p, h1, h2, h3, h4, h5, h6) {
+    margin-block-start: 0;
+  }
 
-/** Theme styles below */
-body {
-  font-family: var(--ap-body-font-family);
-  font-style: var(--ap-body-font-style);
-  font-weight: var(--ap-body-font-weight);
-  font-size: var(--ap-body-font-size);
-  line-height: var(--ap-body-line-height);
-  letter-spacing: var(--ap-body-letter-spacing);
-  background-color: var(--ap-body-bg);
-  color: var(--ap-body-color);
-}
+  :is(p, h1, h2, h3, h4, h5, h6):last-child,
+  :where(p, h1, h2, h3, h4, h5, h6) + :has(+ :empty:last-child) {
+    margin-block-end: 0;
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--ap-heading-font-family);
-  font-style: var(--ap-heading-font-style);
-  font-weight: var(--ap-heading-font-weight);
-  color: var(--ap-heading-color);
-}
+  /** Theme styles below */
+  body {
+    font-family: var(--ap-body-font-family);
+    font-style: var(--ap-body-font-style);
+    font-weight: var(--ap-body-font-weight);
+    font-size: var(--ap-body-font-size);
+    line-height: var(--ap-body-line-height);
+    letter-spacing: var(--ap-body-letter-spacing);
+    background-color: var(--ap-body-bg);
+    color: var(--ap-body-color);
+  }
 
-h1 {
-  font-size: var(--ap-h1-font-size);
-  line-height: var(--ap-h1-line-height);
-  letter-spacing: var(--ap-h1-letter-spacing);
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--ap-heading-font-family);
+    font-style: var(--ap-heading-font-style);
+    font-weight: var(--ap-heading-font-weight);
+    color: var(--ap-heading-color);
+  }
 
-h2 {
-  font-size: var(--ap-h2-font-size);
-  line-height: var(--ap-h2-line-height);
-  letter-spacing: var(--ap-h2-letter-spacing);
-}
+  h1 {
+    font-size: var(--ap-h1-font-size);
+    line-height: var(--ap-h1-line-height);
+    letter-spacing: var(--ap-h1-letter-spacing);
+  }
 
-h3 {
-  font-size: var(--ap-h3-font-size);
-  line-height: var(--ap-h3-line-height);
-  letter-spacing: var(--ap-h3-letter-spacing);
-}
+  h2 {
+    font-size: var(--ap-h2-font-size);
+    line-height: var(--ap-h2-line-height);
+    letter-spacing: var(--ap-h2-letter-spacing);
+  }
 
-h4 {
-  font-size: var(--ap-h4-font-size);
-  line-height: var(--ap-h4-line-height);
-  letter-spacing: var(--ap-h4-letter-spacing);
-}
+  h3 {
+    font-size: var(--ap-h3-font-size);
+    line-height: var(--ap-h3-line-height);
+    letter-spacing: var(--ap-h3-letter-spacing);
+  }
 
-h5 {
-  font-size: var(--ap-h5-font-size);
-  line-height: var(--ap-h5-line-height);
-  letter-spacing: var(--ap-h5-letter-spacing);
-}
+  h4 {
+    font-size: var(--ap-h4-font-size);
+    line-height: var(--ap-h4-line-height);
+    letter-spacing: var(--ap-h4-letter-spacing);
+  }
 
-h6 {
-  font-size: var(--ap-h6-font-size);
-  line-height: var(--ap-h6-line-height);
-  letter-spacing: var(--ap-h6-letter-spacing);
-}
+  h5 {
+    font-size: var(--ap-h5-font-size);
+    line-height: var(--ap-h5-line-height);
+    letter-spacing: var(--ap-h5-letter-spacing);
+  }
 
-a {
-  color: var(--ap-link-color);
-}
+  h6 {
+    font-size: var(--ap-h6-font-size);
+    line-height: var(--ap-h6-line-height);
+    letter-spacing: var(--ap-h6-letter-spacing);
+  }
 
-a:hover {
-  color: var(--ap-link-hover-color);
-}
+  a {
+    color: var(--ap-link-color);
+  }
+
+  a:hover {
+    color: var(--ap-link-hover-color);
+  }
+} /* @layer ap-base */
