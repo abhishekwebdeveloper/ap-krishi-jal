@@ -68,5 +68,32 @@
     --ap-border-color: {{ settings.border_color }};
 
     --ap-input-border-radius: {{ settings.input_corner_radius }}px;
+
+    /* Container */
+    --ap-container-width: 100%;
+    --ap-container-gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    /* Container */
+    :root {
+      --ap-container-width: 704px;
+      --ap-container-gap: 32px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    /* Container */
+    :root {
+      --ap-container-width: 1168px;
+      --ap-container-gap: 40px;
+    }
+  }
+
+  @media (min-width: 1640px) {
+    /* Container */
+    :root {
+      --ap-container-width: 1400px;
+    }
   }
 {% endstyle %}

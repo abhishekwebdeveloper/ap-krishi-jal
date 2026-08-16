@@ -1,14 +1,8 @@
-/** Critical CSS for the theme. This file is included on every page. */
+/** Base CSS for the theme. This file is included on every page. */
 
-/* Cascade layer order. `ap-base` sits AFTER Tailwind's `base` (so these theme
-   defaults beat Tailwind's preflight, e.g. its `h1-h6 { font-size: inherit }`)
-   but BEFORE `utilities` (so a Tailwind utility class on an element always wins).
-   Loaded before tailwind.css, so this sets the canonical order; Tailwind's own
-   `@layer` statements are a consistent subset and merge idempotently. */
 @layer properties, theme, base, components, ap-base, utilities;
 
 @layer ap-base {
-  /* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
   * {
     box-sizing: border-box;
     margin: 0;
@@ -151,5 +145,18 @@
 
   a:hover {
     color: var(--ap-link-hover-color);
+  }
+
+  /* -----------------------------------------------------------------------------
+  * Components > Container.
+  * -------------------------------------------------------------------------- */
+  .ap-container {
+    margin-inline: auto;
+    max-width: var(--ap-container-width);
+    width: calc(100% - (var(--ap-container-gap) * 2));
+
+    .ap-container {
+      width: 100%;
+    }
   }
 } /* @layer ap-base */
