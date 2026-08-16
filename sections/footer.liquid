@@ -1,9 +1,5 @@
 {%- comment -%}
   Footer section.
-
-  Hosts theme blocks (logo, menu columns, newsletter, or any @theme block) laid
-  out as responsive columns, followed by a bottom bar with payment icons,
-  copyright and policy links. All content is editable in the Theme Editor.
 {%- endcomment -%}
 
 {%- liquid
@@ -13,29 +9,46 @@
 -%}
 
 <footer
-  class="ap-footer"
-  role="contentinfo"
+  class="ap-site-footer mt-16 border-t border-t-gray-200 2xl:mt-20"
   style="--ap-footer-bg: {{ bg }}; --ap-footer-fg: {{ fg }}; --ap-footer-border: {{ border }};"
 >
-  <div class="ap-container ap-footer__inner">
+  <div class="ap-container">
     {%- if section.blocks.size > 0 -%}
-      <div class="ap-footer__columns">
+      <div
+        class="
+          ap-site-footer__main grid grid-cols-1 gap-12 pt-16 pb-10
+          md:pb-15
+          xl:pt-20 xl:pb-16
+          lg:gap-15 lg:grid-cols-4
+          2xl:pt-24 2xl:pb-20
+        "
+      >
         {% content_for 'blocks' %}
       </div>
     {%- endif -%}
+  </div>
 
-    <div class="ap-footer__bar">
-      <div class="ap-footer__copyright">
-        &copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}
+  <div class="ap-site-footer__footnote bg-[#FF5F1F]">
+    <div class="ap-container flex flex-wrap items-center justify-between gap-2 py-5 text-sm text-white space-between">
+      <div class="ap-site-footer__footnote-copyright">
+        &copy; {{ 'now' | date: '%Y' }}
+        {{ shop.name | link_to: routes.root_url }}
         {%- if section.settings.show_powered_by %} · {{ powered_by_link }}{%- endif -%}
       </div>
 
       {%- if section.settings.policy_menu != blank and section.settings.policy_menu.links.size > 0 -%}
-        <nav class="ap-footer__policies" aria-label="Legal">
-          <ul>
+        <nav class="ap-site-footer__policies" aria-label="Legal">
+          <ul class="flex flex-wrap gap-2 text-sm text-white">
             {%- for link in section.settings.policy_menu.links -%}
               <li>
-                <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+                <a
+                  href="{{ link.url }}"
+                  {% if link.active %}
+                    aria-current="page"
+                  {% endif %}
+                >
+                  {{- link.title -}}
+                </a>
               </li>
             {%- endfor -%}
           </ul>
@@ -43,7 +56,7 @@
       {%- endif -%}
 
       {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
-        <ul class="ap-footer__payment" aria-label="Payment methods">
+        <ul class="ap-site-footer__payment flex flex-wrap gap-1.5" aria-label="Payment methods">
           {%- for type in shop.enabled_payment_types -%}
             <li>{{ type | payment_type_svg_tag }}</li>
           {%- endfor -%}
@@ -54,90 +67,40 @@
 </footer>
 
 {% stylesheet %}
-  .ap-footer {
-    margin-top: 3rem;
-    padding-block: 3rem 1.5rem;
+  .ap-site-footer {
     background-color: var(--ap-footer-bg);
     color: var(--ap-footer-fg);
   }
 
-  .ap-footer__inner {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-  }
-
-  .ap-footer__columns {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem 2.5rem;
-    align-items: start;
-  }
-
-  .ap-footer__bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--ap-footer-border);
-    font-size: 0.875rem;
-  }
-
-  .ap-footer__copyright a {
+  .ap-site-footer__footnote-copyright a {
     color: inherit;
     text-decoration: none;
   }
 
-  .ap-footer__copyright a:hover {
+  .ap-site-footer__footnote-copyright a:hover {
     text-decoration: underline;
   }
 
-  .ap-footer__policies ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.25rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .ap-footer__policies a {
+  .ap-site-footer__policies a {
     color: inherit;
     text-decoration: none;
   }
 
-  .ap-footer__policies a:hover {
+  .ap-site-footer__policies a:hover {
     text-decoration: underline;
   }
 
-  .ap-footer__payment {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .ap-footer__payment svg {
+  .ap-site-footer__payment svg {
     width: 38px;
     height: auto;
-  }
-
-  @media (max-width: 749px) {
-    .ap-footer__bar {
-      justify-content: flex-start;
-    }
+    flex-shrink: 0;
   }
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "Footer",
-  "tag": "footer",
-  "class": "ap-footer-section",
+  "class": "ap-site-footer-section",
   "blocks": [
     { "type": "@theme" },
     { "type": "footer-logo" },
