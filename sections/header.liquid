@@ -135,7 +135,7 @@
       </ul>
     </div>
 
-    <div class="ap-site-header__shop-actions flex shrink-0 items-center gap-1 [&_path]:text-black">
+    <div class="ap-site-header__shop-actions flex shrink-0 items-center gap-3 [&_path]:text-ap-green-950">
       {%- if shop.customer_accounts_enabled -%}
         <a
           href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
@@ -153,7 +153,7 @@
       {%- endif -%}
 
       <a
-        class="ap-site-header__cart [&_svg]:w-11 [&_svg]:h-11 mt-1"
+        class="ap-site-header__cart [&_svg]:w-6 [&_svg]:h-6"
         href="{{- routes.cart_url }}"
       >
         {% if cart.item_count > 0 %}

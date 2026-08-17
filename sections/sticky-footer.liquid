@@ -1,0 +1,94 @@
+{%- comment -%}
+  Sticky footer.
+{%- endcomment -%}
+
+<div class="ap-sticky-footer pointer-events-none fixed bottom-0 left-0 z-40 w-full lg:hidden">
+  <div
+    class="
+      ap-sticky-footer__main pointer-events-auto grid grid-cols-4 place-items-center
+      overflow-hidden rounded-t-[12px] border-t border-t-gray-100 bg-white
+    "
+  >
+    <button
+      class="ap-sticky-footer__cta flex w-full flex-col items-center justify-center gap-1 px-1 py-2.5"
+      type="button"
+      role="button"
+      x-data
+      @click="$dispatch('ap-open-dialog', 'mobile-menu')"
+    >
+      {{ 'icon-menu.svg' | inline_asset_content }}
+
+      <span class="ap-sticky-footer__title text-center text-xs font-normal capitalize leading-none tracking-tight text-ap-green-950">
+        Menu
+      </span>
+    </button>
+
+    <a
+      class="ap-sticky-footer__cta flex w-full flex-col items-center justify-center gap-1 px-1 py-2.5"
+      href="{{ routes.all_products_collection_url }}"
+    >
+      {{ 'icon-shop.svg' | inline_asset_content }}
+
+      <span class="ap-sticky-footer__title text-center text-xs font-normal capitalize leading-none tracking-tight text-ap-green-950">
+        Shop
+      </span>
+    </a>
+
+    <a
+      class="ap-sticky-footer__cta flex w-full flex-col items-center justify-center gap-1 px-1 py-2.5"
+      href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+      rel="nofollow"
+    >
+      {{ 'icon-user.svg' | inline_asset_content }}
+
+      <span class="ap-sticky-footer__title text-center text-xs font-normal capitalize leading-none tracking-tight text-ap-green-950">
+        Account
+      </span>
+    </a>
+
+    <a
+      class="ap-sticky-footer__cta flex w-full flex-col items-center justify-center gap-1 px-1 py-2.5"
+      href="{{ routes.cart_url }}"
+      {%- if template != 'page.wholesale-order-form' -%}
+        id="cart-icon-bubble"
+      {% endif -%}
+    >
+      {{ 'icon-cart.svg' | inline_asset_content }}
+
+      <span class="ap-sticky-footer__title text-center text-xs font-normal capitalize leading-none tracking-tight text-ap-green-950">
+        Cart
+      </span>
+    </a>
+  </div>
+</div>
+
+{% stylesheet %}
+  .ap-sticky-footer {
+    transform: translateY(100%);
+    animation: ap-slide-bottom-to-top var(--ap-transition-delay, 350ms) linear 1s forwards;
+  }
+
+  @keyframes ap-slide-bottom-to-top {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .ap-sticky-footer__cta svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .ap-sticky-footer__cta svg path[stroke] {
+    stroke: var(--color-ap-green-950, #062d17);
+    stroke-width: 1px;
+  }
+
+  .ap-sticky-footer__cta svg path[fill] {
+    fill: var(--color-ap-green-950, #062d17);
+  }
+{% endstylesheet %}

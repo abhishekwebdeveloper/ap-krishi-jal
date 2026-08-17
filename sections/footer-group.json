@@ -48,7 +48,11 @@
         "text_color": "#303030",
         "border_color": "#EAEAEA"
       }
+    },
+    "sticky-footer": {
+      "type": "sticky-footer",
+      "settings": {}
     }
   },
-  "order": ["footer"]
+  "order": ["footer", "sticky-footer"]
 }
