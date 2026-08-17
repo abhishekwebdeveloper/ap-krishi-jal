@@ -503,11 +503,23 @@
   .py-5 {
     padding-block: calc(var(--spacing) * 5);
   }
+  .pt-5 {
+    padding-top: calc(var(--spacing) * 5);
+  }
   .pt-16 {
     padding-top: calc(var(--spacing) * 16);
   }
   .pb-10 {
     padding-bottom: calc(var(--spacing) * 10);
+  }
+  .pb-\[calc\(20px\+var\(--ap-sticky-footer-height\,0px\)\)\] {
+    padding-bottom: calc(20px + var(--ap-sticky-footer-height,0px));
+  }
+  .pb-\[calc\(20px_\+_var\(--ap-sticky-footer-height\)\)\] {
+    padding-bottom: calc(20px + var(--ap-sticky-footer-height));
+  }
+  .pb-\[calc\(20px_\+_var\(--ap-sticky-footer-height\,0px\)\)\] {
+    padding-bottom: calc(20px + var(--ap-sticky-footer-height,0px));
   }
   .pl-4 {
     padding-left: calc(var(--spacing) * 4);
@@ -679,6 +691,9 @@
     }
     .lg\:py-2\.5 {
       padding-block: calc(var(--spacing) * 2.5);
+    }
+    .lg\:pb-5 {
+      padding-bottom: calc(var(--spacing) * 5);
     }
   }
   @media (width >= 1366px) {
