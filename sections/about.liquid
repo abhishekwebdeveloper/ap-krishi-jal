@@ -4,7 +4,7 @@
   assign image_alt = image.alt | default: section.settings.heading | strip_html | default: 'About'
 %}
 
-<section class="ap-about py-10 lg:py-14" data-ap-about="{{ section.id }}">
+<section class="ap-about py-20 lg:py-24 2xl:py-28" data-ap-about="{{ section.id }}">
   <div class="ap-container">
     <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
       {%- comment -%} Media column {%- endcomment -%}
@@ -59,7 +59,7 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "About Brand"
+      "default": "About"
     },
     {
       "type": "richtext",

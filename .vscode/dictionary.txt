@@ -1,3 +1,5 @@
+endstylesheet
 jfelmfps
 krishi
 offcanvas
+playsinline

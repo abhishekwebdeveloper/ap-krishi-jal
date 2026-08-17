@@ -24,7 +24,16 @@
       }}
     </a>
   {%- else -%}
-    <a href="{{ routes.root_url }}" class="ap-footer-logo__name">{{ shop.name }}</a>
+    <a href="{{ routes.root_url }}" class="ap-footer-logo__link" aria-label="{{ shop.name | escape }}">
+      <img
+        src="{{ 'logo.webp' | asset_url }}"
+        alt="{{ shop.name | escape }}"
+        width="1144"
+        height="712"
+        loading="lazy"
+        class="ap-footer-logo__image"
+      >
+    </a>
   {%- endif -%}
 
   {%- if block.settings.text != blank -%}
@@ -93,7 +102,8 @@
       "type": "richtext",
       "id": "text",
       "label": "Text",
-      "info": "Tagline, address, or contact details."
+      "info": "Tagline, address, or contact details.",
+      "default": "<p><strong>KrishiJal – Healthy Soil. Stronger Crops. Better Harvests.</strong><br>\"स्वस्थ मिट्टी, बेहतर फसल, खुशहाल किसान\"</p>"
     }
   ],
   "presets": [{ "name": "Logo & text" }]

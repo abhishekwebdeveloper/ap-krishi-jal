@@ -3,7 +3,7 @@
   assign show_pagination = section.settings.show_pagination
 %}
 
-<div class="ap-slideshow px-(--ap-container-gap)" data-ap-slideshow="{{ section.id }}">
+<div class="ap-slideshow px-(--ap-container-gap) py-5" data-ap-slideshow="{{ section.id }}">
   <div class="swiper ap-slideshow__swiper">
     <div class="swiper-wrapper">
       {% for block in section.blocks %}
@@ -26,7 +26,20 @@
               }}
             </picture>
           {%- else -%}
-            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- assign slide_num = forloop.index0 | modulo: 3 | plus: 1 -%}
+            {%- assign hero_xl = 'hero-slide-xl-' | append: slide_num | append: '.webp' -%}
+            {%- assign hero_sm = 'hero-slide-sm-' | append: slide_num | append: '.webp' -%}
+            <picture>
+              <source media="(max-width: 767px)" srcset="{{ hero_sm | asset_url }}" width="900" height="1601">
+              <img
+                src="{{ hero_xl | asset_url }}"
+                alt=""
+                width="1525"
+                height="600"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                class="ap-slideshow__image"
+              >
+            </picture>
           {%- endif -%}
           {%- if block.settings.link != blank -%}
             </a>

@@ -35,13 +35,18 @@
         "speed": 800
       }
     },
-    "main": {
-      "type": "hello-world",
+    "about": {
+      "type": "about",
       "settings": {}
-    }
+    },
+    "video": {
+      "type": "video",
+      "settings": {}
+    },
   },
   "order": [
     "slideshow",
-    "main"
+    "about",
+    "video",
   ]
 }

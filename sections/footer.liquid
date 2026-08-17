@@ -3,14 +3,14 @@
 {%- endcomment -%}
 
 {%- liquid
-  assign bg = section.settings.background_color
-  assign fg = section.settings.text_color
-  assign border = section.settings.border_color
+  assign bg_color = section.settings.background_color
+  assign text_color = section.settings.text_color
+  assign border_color = section.settings.border_color
 -%}
 
 <footer
-  class="ap-site-footer mt-16 border-t border-t-ap-green-900 2xl:mt-20"
-  style="--ap-footer-bg: {{ bg }}; --ap-footer-fg: {{ fg }}; --ap-footer-border: {{ border }};"
+  class="ap-site-footer mt-16 border-t border-t-gray-100 2xl:mt-20"
+  style="--ap-footer-bg_color: {{ bg_color }}; --ap-footer-text-color: {{ text_color }}; --ap-footer-border: {{ border_color }};"
 >
   <div class="ap-container">
     {%- if section.blocks.size > 0 -%}
@@ -69,7 +69,7 @@
 {% stylesheet %}
   .ap-site-footer {
     background-color: var(--ap-footer-bg);
-    color: var(--ap-footer-fg);
+    color: var(--ap-footer-text-color);
   }
 
   .ap-site-footer__footnote-copyright a {
@@ -116,6 +116,7 @@
       "type": "link_list",
       "id": "policy_menu",
       "label": "Policy links",
+      "default": "footer",
       "info": "Shown next to the copyright. Tip: create a menu of your store policies (Privacy, Refund, Terms)."
     },
     {
@@ -159,15 +160,17 @@
       "blocks": [
         {
           "type": "footer-logo",
-          "settings": { "text": "<p>Your brand tagline and address go here.</p>" }
+          "settings": {
+            "text": "<p><strong>KrishiJal – Healthy Soil. Stronger Crops. Better Harvests.</strong><br>\"स्वस्थ मिट्टी, बेहतर फसल, खुशहाल किसान\"</p>"
+          }
         },
         {
           "type": "footer-menu",
-          "settings": { "heading": "Quick menu" }
+          "settings": { "heading": "Quick menu", "menu": "main-menu" }
         },
         {
           "type": "footer-menu",
-          "settings": { "heading": "Products" }
+          "settings": { "heading": "Products", "menu": "footer" }
         },
         {
           "type": "footer-newsletter",
