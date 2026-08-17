@@ -1,0 +1,109 @@
+{%- comment -%}
+  This section is use to display offcanvas.
+{%- endcomment -%}
+
+<div
+  class="ap-dialog ap-dialog--offcanvas"
+  x-data="{ open: false }"
+  :data-open="open ? 'yes' : 'no'"
+  @ap-open-dialog.window="
+    if ($event.detail === 'mobile-menu') {
+      open = true
+    } else {
+      open = false
+    }
+  "
+  @keydown.escape.window="open = false"
+  x-cloak
+>
+  <div class="ap-dialog__backdrop" @click="open = false"></div>
+
+  <div class="ap-dialog__main">
+    <button class="ap-dialog__close" type="button" @click="open = false">
+      <span class="sr-only">Close menu</span>
+      {{ 'icon-close.svg' | inline_asset_content }}
+    </button>
+
+    <div class="ap-dialog__container">
+      {%- comment -%} Content added manually. {%- endcomment -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .ap-dialog {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    isolation: isolate;
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility var(--ap-transition-duration, 350ms);
+  }
+
+  .ap-dialog[data-open='yes'] {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .ap-dialog__backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: -10;
+    background-color: rgb(0 0 0 / 0.9);
+    opacity: 0;
+    transition: opacity var(--ap-transition-duration, 350ms);
+  }
+
+  .ap-dialog[data-open='yes'] .ap-dialog__backdrop {
+    opacity: 1;
+  }
+
+  .ap-dialog__main {
+    position: relative;
+    width: calc(100% - 52px);
+    max-width: var(--ap-dialog-main-width, 350px);
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity, transform;
+    transition-duration: var(--ap-transition-duration, 350ms);
+  }
+
+  .ap-dialog[data-open='yes'] .ap-dialog__main {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .ap-dialog__close {
+    position: absolute;
+    top: 12px;
+    right: -44px;
+    display: flex;
+    aspect-ratio: 1;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full, 100vmax);
+    background-color: var(--color-white, #fff);
+  }
+
+  .ap-dialog__close svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ap-dialog__container {
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background-color: var(--color-white, #fff);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Offcanvas",
+  "settings": []
+}
+{% endschema %}

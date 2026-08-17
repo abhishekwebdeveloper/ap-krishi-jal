@@ -1,0 +1,96 @@
+{% liquid
+  assign image = section.settings.image
+  assign image_position = section.settings.image_position
+  assign image_alt = image.alt | default: section.settings.heading | strip_html | default: 'About'
+%}
+
+<section class="ap-about py-20 lg:py-24 2xl:py-28" data-ap-about="{{ section.id }}">
+  <div class="ap-container">
+    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
+      {%- comment -%} Media column {%- endcomment -%}
+      <div class="ap-about__media [&_img]:w-full [&_img]:h-auto [&_img]:rounded-xl [&_img]:object-cover{% if image_position == 'right' %}lg:order-2{% endif %}">
+        {%- if image != blank -%}
+          {{ image | image_url: width: 1200, height: 750 | image_tag: class: 'ap-about__image ' }}
+        {%- else -%}
+          <img
+            src="{{ 'product.jpg' | asset_url }}"
+            alt="{{ image_alt | escape }}"
+            width="1536"
+            height="1024"
+            loading="lazy"
+            class="ap-about__image"
+          >
+        {%- endif -%}
+      </div>
+
+      <div class="ap-about__content {% if image_position == 'right' %}lg:order-1{% endif %}">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="ap-about__heading text-3xl lg:text-4xl">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.content != blank -%}
+          <div class="ap-about__text mt-4">
+            {{ section.settings.content }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .ap-about__text > * + * {
+    margin-top: 1rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "About",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "About"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Text",
+      "default": "<p><strong>KrishiJal</strong> is an innovative agricultural solutions brand dedicated to improving soil health and enhancing crop productivity through science-backed, eco-friendly products. Designed for farmers who seek better yields with sustainable farming practices, KrishiJal offers advanced soil conditioning solutions that strengthen plant growth from the roots up.</p><p>Our flagship <strong>Humic + Fulvic Soil Conditioner</strong> is enriched with <strong>70% Potassium Humate and 25% Fulvic Acid</strong>, providing essential nutrients that improve soil fertility, increase water retention, promote stronger root development, and enhance nutrient absorption. Suitable for <strong>all crops</strong>, KrishiJal's water-soluble capsule technology ensures easy application, consistent results, and maximum convenience.</p><p>At KrishiJal, we believe that healthy soil is the foundation of a prosperous harvest. Every product is developed with a focus on efficiency, quality, and environmental responsibility, helping farmers achieve higher yields while nurturing the land for future generations.</p><p><strong>KrishiJal – Healthy Soil. Stronger Crops. Better Harvests.</strong><br>\"स्वस्थ मिट्टी, बेहतर फसल, खुशहाल किसान\"</p>"
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About"
+    }
+  ]
+}
+{% endschema %}

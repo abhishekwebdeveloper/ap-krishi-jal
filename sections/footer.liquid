@@ -1,56 +1,182 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
+{%- comment -%}
+  Footer section.
+{%- endcomment -%}
+
+{%- liquid
+  assign bg_color = section.settings.background_color
+  assign text_color = section.settings.text_color
+  assign border_color = section.settings.border_color
+-%}
+
+<footer
+  class="ap-site-footer mt-16 border-t border-t-gray-100 2xl:mt-20"
+  style="--ap-footer-bg_color: {{ bg_color }}; --ap-footer-text-color: {{ text_color }}; --ap-footer-border: {{ border_color }};"
+>
+  <div class="ap-container">
+    {%- if section.blocks.size > 0 -%}
+      <div
+        class="
+          ap-site-footer__main grid grid-cols-1 gap-12 pt-16 pb-10
+          md:pb-15
+          xl:pt-20 xl:pb-16
+          lg:gap-15 lg:grid-cols-4
+          2xl:pt-24 2xl:pb-20
+        "
+      >
+        {% content_for 'blocks' %}
+      </div>
+    {%- endif -%}
   </div>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+  <div class="ap-site-footer__footnote bg-ap-darker">
+    <div class="ap-container flex flex-wrap items-center justify-between gap-2 pt-5 pb-[calc(20px+var(--ap-sticky-footer-height,0px))] text-sm text-white space-between lg:pb-5">
+      <div class="ap-site-footer__footnote-copyright">
+        &copy; {{ 'now' | date: '%Y' }}
+        {{ shop.name | link_to: routes.root_url }}
+        {%- if section.settings.show_powered_by %} · {{ powered_by_link }}{%- endif -%}
+      </div>
 
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
+      {%- if section.settings.policy_menu != blank and section.settings.policy_menu.links.size > 0 -%}
+        <nav class="ap-site-footer__policies" aria-label="Legal">
+          <ul class="flex flex-wrap gap-2 text-sm text-white">
+            {%- for link in section.settings.policy_menu.links -%}
+              <li>
+                <a
+                  href="{{ link.url }}"
+                  {% if link.active %}
+                    aria-current="page"
+                  {% endif %}
+                >
+                  {{- link.title -}}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <ul class="ap-site-footer__payment flex flex-wrap gap-1.5" aria-label="Payment methods">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
   </div>
 </footer>
 
 {% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
+  .ap-site-footer {
+    background-color: var(--ap-footer-bg);
+    color: var(--ap-footer-text-color);
   }
-  footer a {
+
+  .ap-site-footer__footnote-copyright a {
+    color: inherit;
     text-decoration: none;
-    color: var(--color-foreground);
   }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
+
+  .ap-site-footer__footnote-copyright a:hover {
+    text-decoration: underline;
+  }
+
+  .ap-site-footer__policies a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ap-site-footer__policies a:hover {
+    text-decoration: underline;
+  }
+
+  .ap-site-footer__payment svg {
+    width: 38px;
+    height: auto;
+    flex-shrink: 0;
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.footer",
+  "name": "Footer",
+  "class": "ap-site-footer-section",
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "footer-logo" },
+    { "type": "footer-menu" },
+    { "type": "footer-newsletter" }
+  ],
   "settings": [
     {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
       "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "id": "policy_menu",
+      "label": "Policy links",
+      "default": "footer",
+      "info": "Shown next to the copyright. Tip: create a menu of your store policies (Privacy, Refund, Terms)."
     },
     {
       "type": "checkbox",
       "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
+      "label": "Show payment icons",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_powered_by",
+      "label": "Show \"Powered by Shopify\"",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#062D17"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Divider",
+      "default": "#14532D"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "footer-logo",
+          "settings": {
+            "text": "<p><strong>KrishiJal – Healthy Soil. Stronger Crops. Better Harvests.</strong><br>\"स्वस्थ मिट्टी, बेहतर फसल, खुशहाल किसान\"</p>"
+          }
+        },
+        {
+          "type": "footer-menu",
+          "settings": { "heading": "Quick menu", "menu": "main-menu" }
+        },
+        {
+          "type": "footer-menu",
+          "settings": { "heading": "Products", "menu": "footer" }
+        },
+        {
+          "type": "footer-newsletter",
+          "settings": {}
+        }
+      ]
     }
   ]
 }

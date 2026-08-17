@@ -1,18 +1,102 @@
+{% # Resolve fonts and apply the selected variant (weight) via font_modify. %}
+{% # font_modify returns blank if the family lacks that weight, so we fall back. %}
+{% liquid
+  assign body_font = settings.body_font
+  assign body_font_variant = body_font | font_modify: 'weight', settings.body_font_variant
+  if body_font_variant != blank
+    assign body_font = body_font_variant
+  endif
+
+  assign heading_font = settings.heading_font
+  assign heading_font_variant = heading_font | font_modify: 'weight', settings.heading_font_variant
+  if heading_font_variant != blank
+    assign heading_font = heading_font_variant
+  endif
+%}
 {% style %}
-  {% # Loads all font variantions with display: swap %}
-  {{ settings.type_primary_font | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+  {% # Load body font variations with display: swap %}
+  {{ body_font | font_face: font_display: 'swap' }}
+  {{ body_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+
+  {% # Load heading font %}
+  {{ heading_font | font_face: font_display: 'swap' }}
 
   :root {
-    --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
-    --font-primary--style: {{ settings.type_primary_font.style }};
-    --font-primary--weight: {{ settings.type_primary_font.weight }};
-    --page-width: {{ settings.max_page_width }};
-    --page-margin: {{ settings.min_page_margin }}px;
-    --color-background: {{ settings.background_color }};
-    --color-foreground: {{ settings.foreground_color }};
-    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+    /* Body typography */
+    --ap-body-font-family: {{ body_font.family }}, {{ body_font.fallback_families }};
+    --ap-body-font-style: {{ body_font.style }};
+    --ap-body-font-weight: {{ body_font.weight }};
+    --ap-body-font-size: {{ settings.body_font_size }}px;
+    --ap-body-line-height: {{ settings.body_line_height }};
+    --ap-body-letter-spacing: {{ settings.body_letter_spacing }}px;
+
+    /* Heading typography */
+    --ap-heading-font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+    --ap-heading-font-style: {{ heading_font.style }};
+    --ap-heading-font-weight: {{ heading_font.weight }};
+
+    /* Per-level heading sizing */
+    --ap-h1-font-size: {{ settings.h1_font_size }}px;
+    --ap-h1-line-height: {{ settings.h1_line_height }};
+    --ap-h1-letter-spacing: {{ settings.h1_letter_spacing }}px;
+    --ap-h2-font-size: {{ settings.h2_font_size }}px;
+    --ap-h2-line-height: {{ settings.h2_line_height }};
+    --ap-h2-letter-spacing: {{ settings.h2_letter_spacing }}px;
+    --ap-h3-font-size: {{ settings.h3_font_size }}px;
+    --ap-h3-line-height: {{ settings.h3_line_height }};
+    --ap-h3-letter-spacing: {{ settings.h3_letter_spacing }}px;
+    --ap-h4-font-size: {{ settings.h4_font_size }}px;
+    --ap-h4-line-height: {{ settings.h4_line_height }};
+    --ap-h4-letter-spacing: {{ settings.h4_letter_spacing }}px;
+    --ap-h5-font-size: {{ settings.h5_font_size }}px;
+    --ap-h5-line-height: {{ settings.h5_line_height }};
+    --ap-h5-letter-spacing: {{ settings.h5_letter_spacing }}px;
+    --ap-h6-font-size: {{ settings.h6_font_size }}px;
+    --ap-h6-line-height: {{ settings.h6_line_height }};
+    --ap-h6-letter-spacing: {{ settings.h6_letter_spacing }}px;
+
+    /* Layout */
+    --ap-page-width: {{ settings.max_page_width }};
+    --ap-page-margin: {{ settings.min_page_margin }}px;
+
+    /* Colors */
+    --ap-heading-color: {{ settings.heading_color }};
+    --ap-body-color: {{ settings.foreground_color }};
+    --ap-link-color: {{ settings.link_color }};
+    --ap-link-hover-color: {{ settings.link_hover_color }};
+    --ap-body-bg: {{ settings.background_color }};
+    --ap-border-color: {{ settings.border_color }};
+
+    --ap-input-border-radius: {{ settings.input_corner_radius }}px;
+
+    /* Container */
+    --ap-container-width: 100%;
+    --ap-container-gap: 20px;
+
+    /* Sticky Footer Height */
+    --ap-sticky-footer-height: 62px;
+  }
+
+  @media (min-width: 768px) {
+    /* Container */
+    :root {
+      --ap-container-width: 704px;
+      --ap-container-gap: 32px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    /* Container */
+    :root {
+      --ap-container-width: 1168px;
+      --ap-container-gap: 40px;
+    }
+  }
+
+  @media (min-width: 1640px) {
+    /* Container */
+    :root {
+      --ap-container-width: 1400px;
+    }
   }
 {% endstyle %}

@@ -13,13 +13,49 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "logo": {
+          "type": "footer-logo",
+          "settings": {
+            "logo_width": 160,
+            "text": "<p><strong>KrishiJal – Healthy Soil. Stronger Crops. Better Harvests.</strong><br>\"स्वस्थ मिट्टी, बेहतर फसल, खुशहाल किसान\"</p>"
+          }
+        },
+        "menu_quick": {
+          "type": "footer-menu",
+          "settings": {
+            "heading": "Quick menu",
+            "menu": "main-menu"
+          }
+        },
+        "menu_products": {
+          "type": "footer-menu",
+          "settings": {
+            "heading": "Products",
+            "menu": "footer"
+          }
+        },
+        "newsletter": {
+          "type": "footer-newsletter",
+          "settings": {
+            "heading": "Subscribe to our newsletter"
+          }
+        }
+      },
+      "block_order": ["logo", "menu_quick", "menu_products", "newsletter"],
       "settings": {
-        "menu": "",
-        "show_payment_icons": true
+        "policy_menu": "footer",
+        "show_payment_icons": true,
+        "show_powered_by": false,
+        "background_color": "#FFFFFF",
+        "text_color": "#303030",
+        "border_color": "#EAEAEA"
       }
+    },
+    "sticky-footer": {
+      "type": "sticky-footer",
+      "settings": {}
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer", "sticky-footer"]
 }
