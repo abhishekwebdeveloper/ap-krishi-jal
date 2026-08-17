@@ -135,7 +135,7 @@
       </ul>
     </div>
 
-    <div class="ap-site-header__shop-actions flex shrink-0 items-center gap-3 [&_path]:text-ap-green-950">
+    <div class="ap-site-header__shop-actions flex shrink-0 items-center gap-5 [&_path]:text-ap-green-950">
       {%- if shop.customer_accounts_enabled -%}
         <a
           href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
